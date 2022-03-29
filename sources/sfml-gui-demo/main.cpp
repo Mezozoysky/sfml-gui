@@ -18,7 +18,7 @@ int main()
     text Text1(GUI.getGUI(), "test text 1", sf::Color(255, 255, 255), window);
     text Text2(GUI.getGUI(), "Text Number 2!", sf::Color(255, 255, 255), window);
     CheckBox checkBox1(GUI.getGUIColor(), "Checkbox Test 1", sf::Color(255, 255, 255));
-   
+
     Slider<int, 1> slider1(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 200, GUI.getFont(), "Slider Test INT!", 10, 15);
     Slider<float, 1> slider2(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 300, GUI.getFont(), "", 0, 1280);
 
@@ -29,7 +29,7 @@ int main()
 
     Slider<float, 2> sliderFloat2(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 200, GUI.getFont(), "", 0, 0, 1280, 720);
 
-    Button button(GUI.getGUI(), GUI.getGUIColor(), 140.0f, sf::Color(255, 255, 255), "Test", "Right Text!");
+    // Button button(GUI.getGUI(), GUI.getGUIColor(), 140.0f, sf::Color(255, 255, 255), "Test", "Right Text!");
 
     ListBox listbox(GUI.getGUIColor(), 200);
 
@@ -61,7 +61,6 @@ int main()
     text2.setFont(font); text2.setFillColor(sf::Color::Black);
     text2.setPosition(sf::Vector2f(50.0f, 100.0f));
 
-    
 
     sf::RectangleShape test;
     test.setPosition(sf::Vector2f(200, 200));
@@ -70,9 +69,6 @@ int main()
     sf::RectangleShape testfloat;
     testfloat.setPosition(sf::Vector2f(600, 200));
     testfloat.setSize(sf::Vector2f(200, 200));
-    
-    
-    
 
     while (window.isOpen())
     {
@@ -96,16 +92,15 @@ int main()
         text.setString(actual_text);
 
 
-        
         std::stringstream ss2;
         ss2 << "Variable bruh = " << bruh;
         std::string actual_text_float = ss2.str();
-        text2.setString(actual_text_float);       
+        text2.setString(actual_text_float);
 
-        if (button.isButtonClicked(window))
-        {
-            clicked = !clicked;
-        }
+        // if (button.isButtonClicked(window))
+        // {
+        //     clicked = !clicked;
+        // }
         if (clicked) { test.setFillColor(sf::Color::Blue); }
         if (!clicked) { test.setFillColor(sf::Color::Yellow); }
 
@@ -114,15 +109,15 @@ int main()
         GUI.UPDATE_GUI(window);
         if (checktest && selectedItem == 2) {
             window.draw(test);
-        }              
-        GUI.DRAW_GUI(window);  
+        }
+        GUI.DRAW_GUI(window);
         if (checktest) {
             Text2.Draw(window, 10, GUI.getGUI());
         }
 
-        button.Draw(window, GUI.getGUI(), GUI.getGUIColor(), 9);
+        // button.Draw(window, GUI.getGUI(), GUI.getGUIColor(), 9);
 
-        Text1.Draw(window, 1, GUI.getGUI());        
+        Text1.Draw(window, 1, GUI.getGUI());
         window.draw(text);
         window.draw(text2);
         slider1.draw(window, 2, GUI.getGUI(), &lulw);
