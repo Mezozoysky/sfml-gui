@@ -1,12 +1,12 @@
-#include <Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <sstream>
 
-#include "sfml-gui-text.hpp"
-#include "sfml-gui-checkbox.hpp"
-#include "sfml-gui-slider.hpp"
-#include "sfml-gui-button.hpp"
-#include "sfml-gui-listbox.hpp"
+#include "text.hpp"
+#include "checkbox.hpp"
+#include "slider.hpp"
+#include "button.hpp"
+#include "listbox.hpp"
 
 class gui
 {

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "sfml-gui.hpp"
+#include <sfml-gui/gui.hpp>
 
 #include <string>
 #include <sstream>
