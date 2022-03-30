@@ -41,6 +41,11 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     sfml-gui/gui.cpp
+    sfml-gui/text.cpp
+    sfml-gui/checkbox.cpp
+    sfml-gui/slider.cpp
+    sfml-gui/button.cpp
+    sfml-gui/listbox.cpp
     )
 
 source_group(TREE ${CMAKE_CURRENT_LIST_DIR}

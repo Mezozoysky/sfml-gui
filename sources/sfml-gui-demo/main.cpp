@@ -6,32 +6,83 @@
 
 /*
 this file shouldn't be used if you want to use the library, main.cpp is only for testing purposes, and gives me a way to test
-and imagine what the GUI would work like in a real games enviroment.
+and imagine what the gui would work like in a real games enviroment.
 
 All that said, if you want to test the library feel free to use my main.cpp, although you could create your own.
 */
 
+using sfml_gui::Gui;
+using sfml_gui::Text;
+using sfml_gui::CheckBox;
+using sfml_gui::Slider;
+using sfml_gui::ListBox;
+using sfml_gui::Button;
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
-    gui GUI("test window 1", sf::Vector2f(600, 400), sf::Vector2f(720, 350), sf::Color(41, 39, 39, 128), sf::Color(124, 222, 162), sf::Color(46, 45, 46));
-    text Text1(GUI.getGUI(), "test text 1", sf::Color(255, 255, 255), window);
-    text Text2(GUI.getGUI(), "Text Number 2!", sf::Color(255, 255, 255), window);
-    CheckBox checkBox1(GUI.getGUIColor(), "Checkbox Test 1", sf::Color(255, 255, 255));
 
-    Slider<int, 1> slider1(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 200, GUI.getFont(), "Slider Test INT!", 10, 15);
-    Slider<float, 1> slider2(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 300, GUI.getFont(), "", 0, 1280);
+    //===================================================================
+    Gui uiWin{
+        "UI Window 0",
+        {600.f, 400.f}, {400.f, 200.f},
+        {64, 64, 64, 255}, {64, 128, 64}, {255, 255, 255}
+    };
+    CheckBox check{uiWin.getGuiColor(), "Checkbox 0", {255, 255, 255}};
+    Slider<int, 1> slider{uiWin.getGuiColor(), {255, 255, 255}, 150.f, uiWin.getFont(), "Slider 0", 0, 150};
+    ListBox list(uiWin.getGuiColor(), 150);
+    //===================================================================
 
-    Slider<int, 3> sliderInt3(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 100, GUI.getFont(), "slider int 3!", 0, 0, 60, 1280, 720, 400);
-    Slider<int, 3> sliderInt3Color(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 173, GUI.getFont(), "", 0, 0, 0, 255, 255, 255);
+    Gui gui("test window 1", sf::Vector2f(600, 400), sf::Vector2f(720, 350), sf::Color(41, 39, 39, 128), sf::Color(124, 222, 162), sf::Color(46, 45, 46));
+    Text text1("test text 1", sf::Color(255, 255, 255));
+    Text text2("Text Number 2!", sf::Color(255, 255, 255));
+    CheckBox checkBox1(gui.getGuiColor(), "Checkbox Test 1", sf::Color(255, 255, 255));
 
-    Slider<float, 3> sliderFloat3(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 173, GUI.getFont(), "", 0, 0, 60, 1280, 720, 400);
+    Slider<int, 1> slider1(/*gui.getGuiColor()*/{182, 64, 182},
+                           {255, 255, 255},
+                           200,
+                           gui.getFont(),
+                           "Slider Test INT!",
+                           10,
+                           15);
+    Slider<float, 1> slider2(gui.getGuiColor(),
+                             sf::Color(255, 255, 255),
+                             300,
+                             gui.getFont(),
+                             "",
+                             0,
+                             1280);
 
-    Slider<float, 2> sliderFloat2(GUI.getGUIColor().getFillColor(), sf::Color(255, 255, 255), 200, GUI.getFont(), "", 0, 0, 1280, 720);
+    Slider<int, 3> sliderInt3(gui.getGuiColor(),
+                              sf::Color(255, 255, 255),
+                              100,
+                              gui.getFont(),
+                              "slider int 3!",
+                              0,
+                              0,
+                              60,
+                              1280,
+                              720,
+                              400);
+    Slider<int, 3> sliderInt3Color(gui.getGuiColor(),
+                                   sf::Color(255, 255, 255),
+                                   173,
+                                   gui.getFont(),
+                                   "",
+                                   0,
+                                   0,
+                                   0,
+                                   255,
+                                   255,
+                                   255);
 
-    // Button button(GUI.getGUI(), GUI.getGUIColor(), 140.0f, sf::Color(255, 255, 255), "Test", "Right Text!");
+    Slider<float, 3> sliderFloat3(gui.getGuiColor(), sf::Color(255, 255, 255), 173, gui.getFont(), "", 0, 0, 60, 1280, 720, 400);
 
-    ListBox listbox(GUI.getGUIColor(), 200);
+    Slider<float, 2> sliderFloat2(gui.getGuiColor(), sf::Color(255, 255, 255), 200, gui.getFont(), "", 0, 0, 1280, 720);
+
+    Button button(gui.getGui(), gui.getGuiColor(), 140.f, sf::Color(255, 255, 255), "Test", "Right Text!");
+
+    ListBox listbox(gui.getGuiColor(), 200);
 
 
     bool checktest = false;
@@ -51,15 +102,19 @@ int main()
     int selectedItem = 1;
     std::string items[]{ "option 1", "option 2", "option 3" };
 
+    bool checkValue{true};
+    int sliderValue{0};
+
     //test text
     sf::Font font; font.loadFromFile("fonts/cour.ttf"); sf::Text text; text.setCharacterSize(20);
     text.setFont(font); text.setFillColor(sf::Color::Black);
 
     text.setPosition(sf::Vector2f(50.0f, 50.0f));
 
-    sf::Text text2; text2.setCharacterSize(20);
-    text2.setFont(font); text2.setFillColor(sf::Color::Black);
-    text2.setPosition(sf::Vector2f(50.0f, 100.0f));
+    sf::Text sftext2 = text2.getText();
+    sftext2.setCharacterSize(20);
+    sftext2.setFont(font); sftext2.setFillColor(sf::Color::Black);
+    sftext2.setPosition(sf::Vector2f(50.0f, 100.0f));
 
 
     sf::RectangleShape test;
@@ -95,42 +150,47 @@ int main()
         std::stringstream ss2;
         ss2 << "Variable bruh = " << bruh;
         std::string actual_text_float = ss2.str();
-        text2.setString(actual_text_float);
+        sftext2.setString(actual_text_float);
 
-        // if (button.isButtonClicked(window))
-        // {
-        //     clicked = !clicked;
-        // }
+        if (button.isClicked(window))
+        {
+            clicked = !clicked;
+        }
         if (clicked) { test.setFillColor(sf::Color::Blue); }
         if (!clicked) { test.setFillColor(sf::Color::Yellow); }
 
         window.clear(sf::Color(56, 56, 56));
         window.draw(testfloat);
-        GUI.UPDATE_GUI(window);
+        gui.update(window);
         if (checktest && selectedItem == 2) {
             window.draw(test);
         }
-        GUI.DRAW_GUI(window);
+        gui.draw(window);
         if (checktest) {
-            Text2.Draw(window, 10, GUI.getGUI());
+            text2.draw(window, 10, gui.getGui());
         }
+        button.draw(window, gui.getGui(), 9);
 
-        // button.Draw(window, GUI.getGUI(), GUI.getGUIColor(), 9);
-
-        Text1.Draw(window, 1, GUI.getGUI());
+        text1.draw(window, 1, gui.getGui());
         window.draw(text);
-        window.draw(text2);
-        slider1.draw(window, 2, GUI.getGUI(), &lulw);
-        slider2.draw(window, 3, GUI.getGUI(), &bruh);
+        window.draw(sftext2);
+        slider1.draw(window, 2, gui.getGui(), &lulw);
+        slider2.draw(window, 3, gui.getGui(), &bruh);
 
-        sliderInt3.draw(window, 4, GUI.getGUI(), int3Test);
-        sliderInt3Color.draw(window, 5, GUI.getGUI(), testColor);
-        sliderFloat3.draw(window, 6, GUI.getGUI(), float3Test);
+        sliderInt3.draw(window, 4, gui.getGui(), int3Test);
+        sliderInt3Color.draw(window, 5, gui.getGui(), testColor);
+        sliderFloat3.draw(window, 6, gui.getGui(), float3Test);
 
-        sliderFloat2.draw(window, 7, GUI.getGUI(), slider2Test);
-        checkBox1.Draw(window, 8, GUI.getGUI(), checktest);
+        sliderFloat2.draw(window, 7, gui.getGui(), slider2Test);
+        checkBox1.draw(window, 8, gui.getGui(), checktest);
 
-        listbox.Draw(window, GUI.getGUI(), 11, 2, items, selectedItem);
+        listbox.draw(window, gui.getGui(), 11, 2, items, selectedItem);
+
+        uiWin.update(window);
+        uiWin.draw(window);
+        check.draw(window, 1, uiWin.getGui(), checkValue);
+        slider.draw(window, 2, uiWin.getGui(), &sliderValue);
+        list.draw(window, uiWin.getGui(), 3, 4, items, selectedItem);
 
         window.display();
     }
