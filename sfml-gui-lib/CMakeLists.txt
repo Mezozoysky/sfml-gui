@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 project(sfml-gui-lib
-    VERSION 0.1.0
+    VERSION ${sfml_gui_VERSION}
     LANGUAGES CXX)
 
 add_library(${PROJECT_NAME})
@@ -30,6 +30,18 @@ target_include_directories(${PROJECT_NAME}
     )
 
 
+install (TARGETS ${PROJECT_NAME}
+    EXPORT ${sfml_gui_EXPORT_NAME}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/sfml-gui"
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.hpp"
+    )
+
+
 set(HEADER_FILES
     sfml-gui/gui.hpp
     sfml-gui/text.hpp
@@ -49,7 +61,7 @@ set(SOURCE_FILES
     )
 
 source_group(TREE ${CMAKE_CURRENT_LIST_DIR}
-    PREFIX PTTT\\${PROJECT_NAME}
+    # PREFIX PTTT\\${PROJECT_NAME}
     FILES ${HEADER_FILES} ${SOURCE_FILES}
     )
 
