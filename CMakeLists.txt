@@ -19,6 +19,9 @@ project(sfml-gui
 
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
+include(build-tree-macros)
+init_build_types(TYPES "Release" "Debug" "RelWithDebInfo" "RelSizeMin" DEFAULT "Release")
+
 option(sfml_gui_BUILD_SHARED_LIBS "Compile sfml-gui as dynamic library" ${BUILD_SHARED_LIBS})
 option(sfml_gui_BUILD_DEMO "Build sfml-gui demo app" ON)
 
