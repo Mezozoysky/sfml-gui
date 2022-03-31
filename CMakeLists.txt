@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
+cmake_policy(SET CMP0028 NEW)
+
 set(sfml_gui_VERSION_MAJOR 0)
 set(sfml_gui_VERSION_MINOR 1)
 set(sfml_gui_VERSION_PATCH 0)
@@ -18,7 +20,7 @@ project(sfml-gui
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
 option(sfml_gui_BUILD_SHARED_LIBS "Compile sfml-gui as dynamic library" ${BUILD_SHARED_LIBS})
-option(sfml_gui_BUILD_DEMO "Build 'sfml-gui-app' library" ON)
+option(sfml_gui_BUILD_DEMO "Build sfml-gui demo app" ON)
 
 set(sfml_gui_GEN_SRC_PATH "${CMAKE_CURRENT_BINARY_DIR}/gensrc")
 message(STATUS "sfml-gui generated sources directory: ${sfml_gui_GEN_SRC_PATH}")
@@ -30,9 +32,9 @@ find_package(SFML 2.5 CONFIG REQUIRED
     )
 
 set(sfml_gui_EXPORT_NAME "sfml_gui_targets")
-add_subdirectory(sfml-gui-lib)
+add_subdirectory(libsfml-gui)
 if (sfml_gui_BUILD_DEMO)
-    add_subdirectory(sfml-gui-demo)
+    add_subdirectory(demo)
 endif(sfml_gui_BUILD_DEMO)
 
 # Handle cmake config

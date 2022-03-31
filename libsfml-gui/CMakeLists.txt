@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
-project(sfml-gui-lib
+project(libsfml-gui
     VERSION ${sfml_gui_VERSION}
     LANGUAGES CXX)
 
 add_library(${PROJECT_NAME})
-add_library(sfml-gui::sfml-gui ALIAS ${PROJECT_NAME})
+add_library(sfml-gui::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
     LINKER_LANGUAGE CXX

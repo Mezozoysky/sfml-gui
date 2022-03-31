@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
-project(sfml-gui-demo
+project(demo
     LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME})
-add_executable(sfml-gui::demo ALIAS ${PROJECT_NAME})
+add_executable(sfml-gui::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
     LINKER_LANGUAGE CXX
@@ -12,7 +12,7 @@ set_target_properties(${PROJECT_NAME}
     CXX_STANDARD_REQUIRED TRUE)
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
-    sfml-gui::sfml-gui
+    sfml-gui::libsfml-gui
     sfml-graphics
     sfml-window
     sfml-system
