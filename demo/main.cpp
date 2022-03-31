@@ -99,8 +99,8 @@ int main()
 
     float slider2Test[2] {0, 0};
 
+    std::vector<std::string> items{ "option 1", "option 2", "option 3" };
     int selectedItem = 1;
-    std::string items[]{ "option 1", "option 2", "option 3" };
 
     bool checkValue{true};
     int sliderValue{0};
@@ -184,13 +184,13 @@ int main()
         sliderFloat2.draw(window, 7, gui.getGui(), slider2Test);
         checkBox1.draw(window, 8, gui.getGui(), checktest);
 
-        listbox.draw(window, gui.getGui(), 11, 2, items, selectedItem);
+        listbox.draw(window, gui.getGui(), 11, items, selectedItem);
 
         uiWin.update(window);
         uiWin.draw(window);
         check.draw(window, 1, uiWin.getGui(), checkValue);
         slider.draw(window, 2, uiWin.getGui(), &sliderValue);
-        list.draw(window, uiWin.getGui(), 3, 4, items, selectedItem);
+        list.draw(window, uiWin.getGui(), 3, items, selectedItem);
 
         window.display();
     }

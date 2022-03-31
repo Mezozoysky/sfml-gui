@@ -1,11 +1,13 @@
 #include "listbox.hpp"
+#include <iostream>
+using std::cout;
+using std::endl;
 
 namespace sfml_gui
 {
 
 ListBox::ListBox(sf::Color const & frontColor, float width)
 {
-
     mFont.loadFromFile("fonts/cour.ttf");
     mDropdownTexture.loadFromFile("images/dropdown.png");
 
@@ -23,8 +25,7 @@ ListBox::ListBox(sf::Color const & frontColor, float width)
 void ListBox::update(sf::RectangleShape const & background,
                      int slot,
                      sf::RenderWindow & window,
-                     int size,
-                     std::string items[],
+                     std::vector<std::string> const & items,
                      int & selectedItem)
 {
     mPosition = sf::Vector2f(background.getGlobalBounds().left + 10.0f, background.getGlobalBounds().top + slot * 20.0f);
@@ -33,8 +34,8 @@ void ListBox::update(sf::RectangleShape const & background,
     mDropdownShape.setPosition(mBackground.getGlobalBounds().left + mBackground.getSize().x - mDropdown.getSize().x, mBackground.getPosition().y);
 
     if (!mIsInitialized) {
-        for (int i = 0; i <= size; i++) {
-
+        for (std::size_t i = 0u; i < items.size(); ++i)
+        {
             mDropdowns[i].setSize(mBackground.getSize());
             mDropdowns[i].setFillColor(sf::Color(mThemeColor.r - 60.0f, mThemeColor.g - 60.0f, mThemeColor.b - 60.0f));
             mDropdownsText[i].setCharacterSize(12);
@@ -51,7 +52,8 @@ void ListBox::update(sf::RectangleShape const & background,
 
     mSelectedText.setPosition(mBackground.getPosition().x + 5.0f, mBackground.getPosition().y - 2.0f);
     mSelectedText.setString(mActualSelectedItem);
-    for (int i = 0; i <= size; i++) {
+    for (std::size_t i = 0u; i < items.size(); ++i)
+    {
         if (i == 0)
         {
             mDropdowns[0].setPosition(mBackground.getPosition().x, mBackground.getPosition().y + 15);
@@ -94,28 +96,30 @@ void ListBox::update(sf::RectangleShape const & background,
                                                mThemeColor.b + 30.0f));
     }
 
-
 }
 
 
 void ListBox::draw(sf::RenderWindow & window,
                    sf::RectangleShape const & pid,
                    int slot,
-                   int size,
-                   std::string items[],
+                   std::vector<std::string> const & items,
                    int & selectedItem)
 {
     window.draw(mBackground);
     window.draw(mDropdown);
     window.draw(mDropdownShape);
+
+    mDropdowns.resize(items.size());
+    mDropdownsText.resize(items.size());
+
     if (mIsDropdownActive) {
-        for (int i = 0; i <= size; i++) {
+        for (std::size_t i = 0u; i < items.size(); ++i) {
             window.draw(mDropdowns[i]);
             window.draw(mDropdownsText[i]);
         }
     }
     window.draw(mSelectedText);
-    update(pid, slot, window, size, items, selectedItem);
+    update(pid, slot, window, items, selectedItem);
 }
 
     bool ListBox::checkHover(sf::RenderWindow const & window, sf::RectangleShape const & object)
@@ -127,10 +131,7 @@ void ListBox::draw(sf::RenderWindow & window,
         {
 			return true;
         }
-		else
-        {
-			return false;
-        }
+        return false;
 	}
 
 	bool ListBox::checkHoverOppo(sf::RenderWindow const & window, sf::RectangleShape const & object)
@@ -142,10 +143,7 @@ void ListBox::draw(sf::RenderWindow & window,
         {
 			return true;
         }
-		else
-        {
-			return false;
-        }
+        return false;
 	}
 
 } // namespace sfml_gui

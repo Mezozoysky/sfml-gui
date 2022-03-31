@@ -10,6 +10,7 @@ set_target_properties(${PROJECT_NAME}
     LINKER_LANGUAGE CXX
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED TRUE)
+
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
     sfml-gui::libsfml-gui

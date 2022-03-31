@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <string>
 
 
 namespace sfml_gui
@@ -14,14 +16,13 @@ public:
 	void update(sf::RectangleShape const & background,
                 int slot,
                 sf::RenderWindow & window,
-                int size,
-                std::string items[],
+                std::vector<std::string> const & items,
                 int & selectedItem);
+
     void draw(sf::RenderWindow & window,
               sf::RectangleShape const & pid,
               int slot,
-              int size,
-              std::string items[],
+              std::vector<std::string> const & items,
               int & selectedItem);
 
     bool checkHover(sf::RenderWindow const & window, sf::RectangleShape const & object);
@@ -33,8 +34,8 @@ private:
 
 	sf::RectangleShape mDropdown;
 
-	sf::RectangleShape mDropdowns[99];
-	sf::Text mDropdownsText[99];
+    std::vector<sf::RectangleShape> mDropdowns;
+    std::vector<sf::Text> mDropdownsText;
 	sf::Font mFont;
 
 	sf::Text mSelectedText;
