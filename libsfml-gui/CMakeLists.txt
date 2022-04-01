@@ -14,6 +14,10 @@ set_target_properties(${PROJECT_NAME}
     OUTPUT_NAME sfml-gui
     )
 
+set(sfml_gui_CONFIG_HEADER_PATH "${sfml_gui_GEN_SRC_PATH}/sfml-gui/config.hpp")
+configure_file(sfml-gui/config.hpp.in
+    ${sfml_gui_CONFIG_HEADER_PATH}
+    )
 target_link_libraries(${PROJECT_NAME}
     INTERFACE
     sfml-graphics
@@ -23,6 +27,7 @@ target_link_libraries(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
+    $<BUILD_INTERFACE:${sfml_gui_GEN_SRC_PATH}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     $<TARGET_PROPERTY:sfml-system,INTERFACE_INCLUDE_DIRECTORIES>
     $<TARGET_PROPERTY:sfml-window,INTERFACE_INCLUDE_DIRECTORIES>
@@ -39,6 +44,9 @@ install (TARGETS ${PROJECT_NAME}
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/sfml-gui"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING PATTERN "*.hpp"
+    )
+install(DIRECTORY "${sfml_gui_GEN_SRC_PATH}/sfml-gui"
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
 

@@ -20,7 +20,7 @@ using sfml_gui::Button;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), std::string{"SFML GUI v."} + SFML_GUI_VERSION);
 
     //===================================================================
     Gui uiWin{

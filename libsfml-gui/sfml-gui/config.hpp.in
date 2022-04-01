@@ -1,0 +1,11 @@
+#pragma once
+
+#define SFML_GUI_VERSION_MAJOR @sfml_gui_VERSION_MAJOR@
+#define SFML_GUI_VERSION_MINOR @sfml_gui_VERSION_MINOR@
+#define SFML_GUI_VERSION_PATCH @sfml_gui_VERSION_PATCH@
+#define SFML_GUI_VERSION "@sfml_gui_VERSION@"
+
+namespace sfml_gui
+{
+} // namespace sfml_gui
+

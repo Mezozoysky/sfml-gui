@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 
+#include <sfml-gui/config.hpp>
 #include "text.hpp"
 #include "checkbox.hpp"
 #include "slider.hpp"
