@@ -19,16 +19,23 @@ project(sfml-gui
 
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
+include(GNUInstallDirs)
 include(build-tree-macros)
 init_build_types(TYPES "Release" "Debug" "RelWithDebInfo" "RelSizeMin" DEFAULT "Release")
+if (NOT sfml_gui_OUTPUT_PREFIX)
+    if (GENERATOR_IS_MULTI_CONFIG)
+        set(sfml_gui_OUTPUT_PREFIX "${CMAKE_BINARY_DIR}/")
+    else()
+        set(sfml_gui_OUTPUT_PREFIX "${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
+    endif()
+endif()
+init_output_directories(OUTPUT_PREFIX "${sfml_gui_OUTPUT_PREFIX}")
 
 option(sfml_gui_BUILD_SHARED_LIBS "Compile sfml-gui as dynamic library" ${BUILD_SHARED_LIBS})
 option(sfml_gui_BUILD_DEMO "Build sfml-gui demo app" ON)
 
 set(sfml_gui_GEN_SRC_PATH "${CMAKE_CURRENT_BINARY_DIR}/gensrc")
 message(STATUS "sfml-gui generated sources directory: ${sfml_gui_GEN_SRC_PATH}")
-
-include(GNUInstallDirs)
 
 find_package(SFML 2.5 CONFIG REQUIRED
     COMPONENTS system window graphics
