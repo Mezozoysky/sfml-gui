@@ -7,9 +7,7 @@ set(sfml_gui_VERSION_MINOR 1)
 set(sfml_gui_VERSION_PATCH 0)
 set(sfml_gui_VERSION "${sfml_gui_VERSION_MAJOR}.${sfml_gui_VERSION_MINOR}.${sfml_gui_VERSION_PATCH}")
 
-message(STATUS "CMake source directory: ${CMAKE_SOURCE_DIR}")
 message(STATUS "sfml-gui source directory: ${CMAKE_CURRENT_SOURCE_DIR}")
-message(STATUS "CMake build directory: ${CMAKE_BINARY_DIR}")
 message(STATUS "sfml-gui build directory: ${CMAKE_CURRENT_BINARY_DIR}")
 message(STATUS "sfml_gui version: ${sfml_gui_VERSION}")
 
